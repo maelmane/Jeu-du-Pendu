@@ -1,0 +1,163 @@
+#+SETUPFILE: https://plafrance.pages.dti.crosemont.quebec/org-html-themes/org/theme-readtheorg.setup
+#+PROPERTY: header-args :eval never-export
+#+#+TITLE: Le Pendu
+
+#+begin_export html
+<a href="./01 - introduction.pdf">Version PDF</a>
+#+end_export
+
+* Le jeu du pendu
+
+Le « [[https://fr.wikipedia.org/wiki/Pendu_(jeu)][jeu du pendu]] » est un jeu dans lequel le joueur tente de deviner un
+mot préalablement déterminé en sélectionnant des lettres de l'alphabet.
+Une partie du corps du pendu est ajouté à l'image à chaque fois qu'une
+mauvaise lettre est choisie. Le joueur doit trouver le mot avant que le
+bonhomme ne soit complété sans quoi il perd la partie.
+
+Vous êtes prié(e) de consulter votre enseignant ou un autre étudiant si
+vous n'avez jamais joué au « jeu du pendu ». Plusieurs versions du jeu
+sont disponibles sur Internet. Une recherche sur Internet vous permettra
+d'obtenir des idées cependant, VOUS NE DEVEZ EN AUCUN CAS COPIER ce que
+vous aurez trouvé.
+
+Implémentez la classe Jeu et l'activité principale.
+
+Pensez à suivre les [[https://plafrance.pages.dti.crosemont.quebec/normes/normes_de_prog.html][normes de programmation]] et à documenter les
+méthodes publiques.
+
+#+ATTR_HTML: :width 50%
+#+ATTR_LATEX: :width 250
+[[file:images/image1.png]]
+
+* Description des classes*
+
+** Schéma UML
+
+#+begin_src plantuml :file images/uml.png
+skinparam classAttributeIconSize 0
+
+interface View.OnClickListener
+
+package dti.g25.pendu {
+		
+	View.OnClickListener <|.. MainActivity
+	MainActivity o-- Jeu
+
+
+	class Jeu {
+		+ << get >> pointage: Int
+		+ << get >> nbErreurs: Int
+
+		+ Jeu()
+		+ essayerUneLettre( lettre: Char ): Boolean
+		+ estRéussi(): Boolean
+		+ réinitialiser()
+		+ étatDesLettresDécouvertes(): Array<Char>
+	}
+
+	class MainActivity {
+        - jeu: Jeu						
+		- onClick(v : View)
+		- rafraîchirLettres( état: String )
+		- rafraîchirScore( score: Int)
+		- sélectionnerLettre( lettre: Char )
+		- réinitialiserJeu()
+	}
+}
+#+end_src
+
+#+ATTR_HTML: :width 50%
+#+ATTR_LATEX: :width 250
+#+RESULTS:
+[[file:images/uml.png]]
+
+
+** La classe ~Jeu~ qui simule le jeu. Elle doit comporter les membres
+   suivants :
+
+   - Les propriétés :
+
+     - ~pointage~ (Int) : lecture seule. Le nombre de lettres découvertes du mot à deviner.
+     - ~nbErreurs~ (Int) : lecture seule. Le nombre de lettres erronées essayées.
+
+   - Un constructeur qui :
+
+     - Reçoit en paramètre un tableau de mots
+
+     - Lance une exception de type ~IllegalArgumentException~ si la liste de mots est vide
+
+     - crée un jeu et initialise ~motÀDeviner~
+       avec un mot qui sera choisi au hasard parmi la liste reçue
+
+   - La méthode ~essayerUneLettre~, qui vérifie si une lettre essayée se trouve dans le mot à deviner et ajuste les propriétés ~pointage~ et ~nbErreurs~ en conséquence. Aucune modification n'est apportée au pointage ou au nombre d'erreurs si la lettre a déjà été essayée auparavant. Retourne vrai si et seulement si la lettre essayée se trouve dans le mot à deviner.
+
+     Le paramètre ~lettre~ doit être indifférent à la casse ("a" et "A" donnent le même résultat)
+
+   - La méthode ~estRéussi~ qui retourne vrai si et seulement si toutes les lettres du mot ont été découvertes.
+
+   - La méthode ~réinitialiser~ qui remet le pointage et le nombre d'erreurs à 0 et sélectionne aléatoirement un nouveau mot à deviner.
+
+   - La méthode ~étatDesLettresDécouvertes~, qui retourne un tableau de caractères représentant chacun une lettre du mot à deviner par :
+
+     - La lettre en question, *en majuscule*, si la lettre a été découverte
+
+     - Le caractère souligné (_) si la lettre n'a pas été découverte
+
+** L'activité principale *Pendu* 
+
+- Présente l'écran de jeu (voir les images)
+- Affiche un message à la fin du jeu avec le mot à deviner et le pointage.
+- Permet de rejouer
+
+** Tests unitaires
+
+La classe ~Jeu~ doit avoir été validée au moyen de tests unitaires *pour chacune de ses méthodes publiques*
+
+Les noms des tests doivent suivre le modèle Gherkins («Étant donné... lorsque... on obtient»).
+
+Testez le comportement «normal» des méthodes, les cas limites et les cas d'erreur.
+
+Tous les tests doivent être exécutables et réussir.
+
+* Éléments-clés
+
+ Voici les caractéristiques principales du jeu :
+
+- Un maximum de six membres (une tête, un corps, deux bras et deux
+  jambes) peut être ajoutés au corps d'un joueur. Un membre est ajouté
+  au « pendu » chaque fois que le joueur sélectionne une mauvaise lettre
+  ;
+
+- Les lettres sont représentées par une série de boutons.
+
+- Toutes les occurrences de la lettre devraient être affichées au bon
+  endroit si cette dernière est contenue dans le mot caché ;
+
+- Il ne devrait pas être possible de sélectionner une même lettre plus d'une fois
+
+- Un mot sera choisi au hasard parmi une liste d'au moins dix mots. Le caractère souligné (_) remplace les lettres qui n'ont pas encore été découvertes.
+
+- Un bouton contenant l'option « Débuter » devrait être proposé.
+  Ce bouton peut faire redémarrer la partie à tout moment *après confirmation* de l'utilisateur.
+
+- Tout texte présent sur l'interface doit être internationalisé (en français et au moins une autre langue de votre choix)
+
+* Procédure de remise
+
+Sur GitLab, dans une divergence de ce projet.
+
+* Date de remise
+
+** Première remise pour revue de code : 31 mars 2023
+
+** Revue de code : 7 avril 2023
+
+** Remise finale avec corrections : 14 avril 2023
+
+* Exemples d'interfaces
+
+*Voici des interfaces qui seraient acceptables :*
+
+#+ATTR_HTML: :width 50%
+#+ATTR_LATEX: :width 150
+[[file:images/image2.png]][[file:images/image3.png]][[file:images/image4.png]] [[file:images/image5.png]]
