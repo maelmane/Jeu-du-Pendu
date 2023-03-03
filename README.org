@@ -3,7 +3,7 @@
 #+#+TITLE: Le Pendu
 
 #+begin_export html
-<a href="./01 - introduction.pdf">Version PDF</a>
+<a href="./README.pdf">Version PDF</a>
 #+end_export
 
 * Le jeu du pendu
