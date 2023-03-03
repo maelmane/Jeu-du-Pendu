@@ -25,10 +25,6 @@ Implémentez la classe Jeu et l'activité principale.
 Pensez à suivre les [[https://plafrance.pages.dti.crosemont.quebec/normes/normes_de_prog.html][normes de programmation]] et à documenter les
 méthodes publiques.
 
-#+ATTR_HTML: :width 50%
-#+ATTR_LATEX: :width 250
-[[file:images/image1.png]]
-
 * Description des classes*
 
 ** Schéma UML
