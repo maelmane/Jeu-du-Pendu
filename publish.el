@@ -30,7 +30,7 @@
              :recursive t
              :publishing-function '(org-html-publish-to-html)
              :publishing-directory "./public"
-             :exclude (regexp-opt '("README" "draft"))
+             :exclude (regexp-opt '("draft"))
              :auto-sitemap t
              :sitemap-filename "index.org"
              :sitemap-file-entry-format "%d *%t* (pdf *%t*)"
@@ -43,7 +43,7 @@
              :recursive t
              :publishing-function '(org-latex-publish-to-pdf)
              :publishing-directory "./public"
-             :exclude (regexp-opt '("README" "draft"))
+             :exclude (regexp-opt '("draft"))
              :auto-sitemap nil
 			 )
        (list "site-static"
