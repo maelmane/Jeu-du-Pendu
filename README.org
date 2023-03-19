@@ -61,13 +61,13 @@ Présentateur o-r- Jeu
 	class Présentateur {
 		- jeu: Jeu
 
-	        + sélectionnerLettre( lettre: Char )
+		+ sélectionnerLettre( lettre: Char )
 		+ démarrer()
 	}
 
 
 	class MainActivity {
-                - présentaeur: Présentateur
+		- présentaeur: Présentateur
 		- onClick(v : View)
 		- afficherÉtatLettres( état: String )
 		- afficherScore( score: Int)
