@@ -35,31 +35,44 @@ skinparam classAttributeIconSize 0
 interface View.OnClickListener
 
 package dti.g25.pendu {
-		
-	View.OnClickListener <|.. MainActivity
-	MainActivity o-- Jeu
-
-
+View.OnClickListener <|.. MainActivity
+}
+package dti.g25.pendu.présentateur {
+MainActivity o-r- Présentateur
+}
+package dti.g25.pendu.modèle {
+Présentateur o-r- Jeu
+}
 	class Jeu {
+		- lettresEssayées: CharArray
+		- motÀDeviner: String
 		+ << get >> pointage: Int
 		+ << get >> nbErreurs: Int
 
-		+ Jeu()
+
+		+ Jeu( listeDeMots: Array<String> )
 		+ essayerUneLettre( lettre: Char ): Boolean
 		+ estRéussi(): Boolean
 		+ réinitialiser()
-		+ étatDesLettresDécouvertes(): Array<Char>
+		+ étatLettres(): CharArray
 	}
 
-	class MainActivity {
-        - jeu: Jeu						
-		- onClick(v : View)
-		- rafraîchirLettres( état: String )
-		- rafraîchirScore( score: Int)
-		- sélectionnerLettre( lettre: Char )
-		- réinitialiserJeu()
+
+	class Présentateur {
+		- jeu: Jeu
+
+	        + sélectionnerLettre( lettre: Char )
+		+ démarrer()
 	}
-}
+
+
+	class MainActivity {
+                - présentaeur: Présentateur
+		- onClick(v : View)
+		- afficherÉtatLettres( état: String )
+		- afficherScore( score: Int)
+	}
+
 #+end_src
 
 #+ATTR_HTML: :width 50%
