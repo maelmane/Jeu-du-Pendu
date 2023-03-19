@@ -75,7 +75,7 @@ Présentateur o-r- Jeu
 
 #+end_src
 
-#+ATTR_HTML: :width 50%
+#+ATTR_HTML: :width 100%
 #+ATTR_LATEX: :width 250
 #+RESULTS:
 [[file:images/uml.png]]
