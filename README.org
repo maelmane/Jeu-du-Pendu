@@ -81,8 +81,9 @@ Présentateur o-r- Jeu
 [[file:images/uml.png]]
 
 
-** La classe ~Jeu~ qui simule le jeu. Elle doit comporter les membres
-   suivants :
+** La classe ~Jeu~
+
+qui simule le jeu. Elle doit comporter les membres suivants :
 
    - Les propriétés :
 
@@ -106,16 +107,30 @@ Présentateur o-r- Jeu
 
    - La méthode ~réinitialiser~ qui remet le pointage et le nombre d'erreurs à 0 et sélectionne aléatoirement un nouveau mot à deviner.
 
-   - La méthode ~étatDesLettresDécouvertes~, qui retourne un tableau de caractères représentant chacun une lettre du mot à deviner par :
+   - La méthode ~étatLettres~, qui retourne un tableau de caractères représentant chacun une lettre du mot à deviner par :
 
      - La lettre en question, *en majuscule*, si la lettre a été découverte
 
      - Le caractère souligné (_) si la lettre n'a pas été découverte
 
+** La classe Présentateur
+qui contrôle la présentation des données sur l'interface. Elle doit comporter les membres suivants:
+
+- La méthode ~sélectionnerLettre~, qui réagit à la sélection par l'utilisateur d'une des lettres.
+
+- La méthode ~démarrer~, qui est appelée lorsque le jeu démarre et initialise ou réinitialise les données dans l'interface utilisateur.
+
 ** L'activité principale *Pendu* 
 
 - Présente l'écran de jeu (voir les images)
-- Affiche un message à la fin du jeu avec le mot à deviner et le pointage.
+- Affiche un message à la fin du jeu avec le mot à deviner et le pointage,
+
+- Affiche le score,
+
+- Affiche l'état (essayée ou non) de chaque lettre,
+
+- Permet de sélectionner la prochaine lettre à essayer,
+  
 - Permet de rejouer
 
 ** Tests unitaires
