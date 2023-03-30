@@ -31,7 +31,7 @@ class Jeu(listeDeMots : Array<String>) {
 
     /**
      * vérifie si une lettre essayée se trouve dans le mot
-     * à deviner et ajuste les propriétés
+     * à deviner et ajuste les propriétés pointage et nbErreurs
      *
      * @param lettre la lettre essayée
      *
@@ -66,7 +66,12 @@ class Jeu(listeDeMots : Array<String>) {
      * @return vrai si et seulement si toutes les lettres du mot ont été découvertes
      */
     fun estRéussi() : Boolean{
-        return false
+        if(nbErreurs < 6){
+            return true
+        }else{
+            return false
+        }
+
     }
 
 
