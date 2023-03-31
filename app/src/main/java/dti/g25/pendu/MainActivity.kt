@@ -101,6 +101,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
        tvMot.text = présentateur.motSouligné
     }
 
+    fun afficherÉtatLettres(état : String){
+
+    }
+
     /**
      * Affiche un message à l'utilisateur lorsqu'il perd
      * @param mot le mot à deviner

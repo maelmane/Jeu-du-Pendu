@@ -12,7 +12,7 @@ class Presentateur(var vue: MainActivity) {
     val mot2 = "CHAT".uppercase()
     val mot3 = "PALOURDE".uppercase()
     val mot4 = "ROUTE".uppercase()
-    val mot5 = "TATOU".uppercase()
+    val mot5 = "GESTUEL".uppercase()
     val mot6 = "POIL".uppercase()
     val mot7 = "ADMINISTRATION".uppercase()
     val mot8 = "CONVERTIR".uppercase()
@@ -31,8 +31,6 @@ class Presentateur(var vue: MainActivity) {
      * Réagit à la sélection par l’utilisateur d’une des lettres
      */
     fun sélectionnerLettre(lettre: Char) {
-
-
         //Désactiver la lettre avec la vue
         vue.désactiverLettreUtilisée(lettre)
 
