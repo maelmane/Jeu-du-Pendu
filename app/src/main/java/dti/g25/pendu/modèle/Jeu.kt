@@ -3,8 +3,9 @@ package dti.g25.pendu.modèle
 class Jeu(listeDeMots : Array<String>) {
     var pointage : Int = 0
     var nbErreurs : Int = 0
-    lateinit private var lettresEssayées : CharArray
-    private var motÀDeviner : String
+    var lettresEssayées : CharArray = charArrayOf()
+    var lettresÀRéactiver : CharArray = charArrayOf()
+    var motÀDeviner : String
     lateinit var mots : Array<String>
 
 
@@ -22,10 +23,9 @@ class Jeu(listeDeMots : Array<String>) {
      *
      * @return un mot sélectionné au hasard
      */
-    fun sélectionnerProchainMot() : String {
+    fun sélectionnerProchainMot(): String {
         var numéroAléatoire = kotlin.random.Random.nextInt(mots.size)
-        var prochainMot = mots[numéroAléatoire]
-        return prochainMot
+        return mots[numéroAléatoire]
     }
 
 
@@ -40,6 +40,7 @@ class Jeu(listeDeMots : Array<String>) {
     fun essayerUneLettre(lettre : Char) : Boolean{
         //Ajouter la lettre essayée à la liste de lettres essayées
         lettresEssayées += lettre
+        lettresÀRéactiver += lettre
 
         //Liste des lettres dans le mot à deviner
         var lettresMotÀDeviner : CharArray = motÀDeviner.toCharArray()
@@ -50,15 +51,15 @@ class Jeu(listeDeMots : Array<String>) {
         for (l in lettresMotÀDeviner){
             if (lettre == l){
                 estDansLeMot = true
+                pointage++
             }
         }
-        if(estDansLeMot){
-            pointage++
-            return true
-        }else{
+        if (!estDansLeMot){
             nbErreurs++
-            return false
         }
+
+        //Log.d("Mot", motÀDeviner)
+        return estDansLeMot
     }
 
 
@@ -66,12 +67,33 @@ class Jeu(listeDeMots : Array<String>) {
      * @return vrai si et seulement si toutes les lettres du mot ont été découvertes
      */
     fun estRéussi() : Boolean{
-        if(nbErreurs < 6){
-            return true
-        }else{
-            return false
+        var réussi = false
+        if(pointage == motÀDeviner.length){
+            réussi = true
         }
+        return réussi
+    }
 
+    /**
+     * @return un tableau de caractères représentant chacun une lettre du mot à deviner par :
+     *     - La lettre en question, en majuscule, si la lettre a été découverte
+     *     - Le caractère souligné (_) si la lettre n’a pas été découverte
+     *
+     *     NE FONCTIONNE PAS COMME IL FAUT: LETTRE APPARAIT APRÈS AVOIR CLIQUER SUR UNE AUTRE LETTRE
+     */
+    fun étatLettres() : String{
+        var souligné = StringBuilder()
+
+        for (l in motÀDeviner.toCharArray().indices){
+            souligné.append('_')
+            souligné.append(' ')
+            for(i in lettresEssayées.indices){
+                if (motÀDeviner.toCharArray()[l] == lettresEssayées[i]){
+                    souligné[l*2] = lettresEssayées[i]
+                }
+            }
+        }
+        return souligné.toString()
     }
 
 
@@ -82,5 +104,6 @@ class Jeu(listeDeMots : Array<String>) {
         pointage = 0
         nbErreurs = 0
         motÀDeviner = sélectionnerProchainMot()
+        lettresEssayées = charArrayOf()
     }
 }

@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Pendu</string>
     <string name="score">Score</string>
-    <string name="réinit">Réinitialiser</string>
+    <string name="réinit">Reset</string>
 </resources>
