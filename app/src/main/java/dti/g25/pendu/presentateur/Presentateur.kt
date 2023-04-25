@@ -6,23 +6,9 @@ import dti.g25.pendu.modèle.Jeu
 
 class Presentateur(var vue: MainActivity) {
 
-
-    //Mots à deviner
-    val mot1 = "MONSTRE".uppercase()
-    val mot2 = "CHAT".uppercase()
-    val mot3 = "PALOURDE".uppercase()
-    val mot4 = "ROUTE".uppercase()
-    val mot5 = "GESTUEL".uppercase()
-    val mot6 = "POIL".uppercase()
-    val mot7 = "ADMINISTRATION".uppercase()
-    val mot8 = "CONVERTIR".uppercase()
-    val mot9 = "REPUBLIQUE".uppercase()
-    val mot10 = "VERDICT".uppercase()
-
-    //Liste de mots à deviner
-    val listeDeMots : Array<String> = arrayOf(mot1, mot2, mot3, mot4, mot5, mot6, mot7, mot8, mot9, mot10)
-
-
+    val listeDeMots = arrayOf("MONSTRE","CHAT","PALOURDE",
+        "ROUTE","GESTUEL","POIL","ADMINISTRATION","CONVERTIR",
+        "REPUBLIQUE","VERDICT" )
 
     val jeu = Jeu(listeDeMots)
     var motSouligné = ""
@@ -31,23 +17,21 @@ class Presentateur(var vue: MainActivity) {
      * Réagit à la sélection par l’utilisateur d’une des lettres
      */
     fun sélectionnerLettre(lettre: Char) {
-        //Désactiver la lettre avec la vue
         vue.désactiverLettreUtilisée(lettre)
+
+        var bonneLettre = jeu.essayerUneLettre(lettre)
 
         motSouligné = jeu.étatLettres()
         vue.afficherSouligné()
 
-        var bonneLettre = jeu.essayerUneLettre(lettre)
-
-
-        if(!bonneLettre){   //Si Mauvaise Lettre
-            when (jeu.nbErreurs){
+        if (!bonneLettre)  {
+            when (jeu.nbErreurs) {
                 1 -> vue.afficherImageErreur1()
                 2 -> vue.afficherImageErreur2()
                 3 -> vue.afficherImageErreur3()
                 4 -> vue.afficherImageErreur4()
                 5 -> vue.afficherImageErreur5()
-                6 -> {  //Jeu Perdu
+                6 -> {
                     vue.afficherImageErreur6()
                     vue.afficherPerte(jeu.motÀDeviner)
                 }
@@ -55,8 +39,7 @@ class Presentateur(var vue: MainActivity) {
         }
         vue.afficherScore(jeu.pointage)
 
-        //Si le jeu est gagné
-        if (jeu.estRéussi()){
+        if (jeu.estRéussi()) {
             vue.afficherGagné()
         }
     }
@@ -64,13 +47,13 @@ class Presentateur(var vue: MainActivity) {
     /**
      * Démarre le jeu
      */
-    fun démarrer(){
+    fun démarrer() {
+        vue.réactiverLettres(jeu.lettresEssayées)
         jeu.réinitialiser()
         motSouligné = jeu.étatLettres()
         vue.afficherImageErreur0()
-        vue.réactiverLettres(jeu.lettresÀRéactiver)
         jeu.étatLettres()
-        vue.afficherSouligné()    //Mettre fonction état de lettre??
+        vue.afficherSouligné()
         vue.afficherScore(jeu.pointage)
     }
 }

@@ -3,11 +3,9 @@ package dti.g25.pendu.modèle
 class Jeu(listeDeMots : Array<String>) {
     var pointage : Int = 0
     var nbErreurs : Int = 0
-    var lettresEssayées : CharArray = charArrayOf()
-    var lettresÀRéactiver : CharArray = charArrayOf()
+    var lettresEssayées = charArrayOf()
     var motÀDeviner : String
-    lateinit var mots : Array<String>
-
+    var mots : Array<String>
 
     init {
         mots = listeDeMots
@@ -24,8 +22,7 @@ class Jeu(listeDeMots : Array<String>) {
      * @return un mot sélectionné au hasard
      */
     fun sélectionnerProchainMot(): String {
-        var numéroAléatoire = kotlin.random.Random.nextInt(mots.size)
-        return mots[numéroAléatoire]
+        return mots.random()
     }
 
 
@@ -37,28 +34,20 @@ class Jeu(listeDeMots : Array<String>) {
      *
      * @return vrai si et seulement si la lettre essayée se trouve dans le mot à deviner
      */
-    fun essayerUneLettre(lettre : Char) : Boolean{
-        //Ajouter la lettre essayée à la liste de lettres essayées
+    fun essayerUneLettre(lettre : Char) : Boolean {
         lettresEssayées += lettre
-        lettresÀRéactiver += lettre
 
-        //Liste des lettres dans le mot à deviner
-        var lettresMotÀDeviner : CharArray = motÀDeviner.toCharArray()
-
-        //Booléen vérifiant si la lettre essayée est dans le mot
         var estDansLeMot = false
 
-        for (l in lettresMotÀDeviner){
-            if (lettre == l){
+        for (l in motÀDeviner.toCharArray()) {
+            if (lettre == l) {
                 estDansLeMot = true
                 pointage++
             }
         }
-        if (!estDansLeMot){
+        if (!estDansLeMot) {
             nbErreurs++
         }
-
-        //Log.d("Mot", motÀDeviner)
         return estDansLeMot
     }
 
@@ -66,12 +55,8 @@ class Jeu(listeDeMots : Array<String>) {
     /**
      * @return vrai si et seulement si toutes les lettres du mot ont été découvertes
      */
-    fun estRéussi() : Boolean{
-        var réussi = false
-        if(pointage == motÀDeviner.length){
-            réussi = true
-        }
-        return réussi
+    fun estRéussi() : Boolean {
+        return pointage == motÀDeviner.length
     }
 
     /**
@@ -81,26 +66,26 @@ class Jeu(listeDeMots : Array<String>) {
      *
      *     NE FONCTIONNE PAS COMME IL FAUT: LETTRE APPARAIT APRÈS AVOIR CLIQUER SUR UNE AUTRE LETTRE
      */
-    fun étatLettres() : String{
-        var souligné = StringBuilder()
+    fun étatLettres() : String {
+        var caractèreSouligné = StringBuilder()
 
-        for (l in motÀDeviner.toCharArray().indices){
-            souligné.append('_')
-            souligné.append(' ')
-            for(i in lettresEssayées.indices){
-                if (motÀDeviner.toCharArray()[l] == lettresEssayées[i]){
-                    souligné[l*2] = lettresEssayées[i]
+        for (l in motÀDeviner.toCharArray().indices) {
+            caractèreSouligné.append('_')
+            caractèreSouligné.append(' ')
+            for(i in lettresEssayées.indices) {
+                if (motÀDeviner.toCharArray()[l] == lettresEssayées[i]) {
+                    caractèreSouligné[l*2] = lettresEssayées[i]
                 }
             }
         }
-        return souligné.toString()
+        return caractèreSouligné.toString()
     }
 
 
     /**
      * Réinitialise le jeu
      */
-    fun réinitialiser(){
+    fun réinitialiser() {
         pointage = 0
         nbErreurs = 0
         motÀDeviner = sélectionnerProchainMot()

@@ -9,23 +9,12 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import dti.g25.pendu.presentateur.Presentateur
-
-//Couleur normale des boutons (mauve)
-val COULEUR_NORMALE = 0xffFF6200ED.toInt()
-
-//Couleur des boutons lorsqu'ils sont désactivés (gris)
-val COULEUR_DÉSACTIVÉE = 0xff888888.toInt()
-
-//Image du Jeu montrant le jeu du pendu
 lateinit var imgPendu : ImageView
 
-//Zone de texte contenant le score
 lateinit var tvScore : TextView
 
-//Bouton de réinitialisation
 lateinit var btnRéinit : Button
 
-//Zone de texte contenant le mot à deviner
 lateinit var tvMot : TextView
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -48,11 +37,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v : View) {
-        var idButton = v.id     //Id du bouton cliqué
+        var idButton = v.id
         var btnCliqué : Button = findViewById(idButton)
-        var letterCliqué = btnCliqué.text.toString().toCharArray()[0]    //N'arrive pas à le mettre juste Char alors utilise le premier élément du CharArray
+        var lettreCliquée = btnCliqué.text.toString().first()
 
-        présentateur.sélectionnerLettre(letterCliqué)
+        présentateur.sélectionnerLettre(lettreCliquée)
     }
 
     /**
@@ -67,12 +56,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     /**
      * Désactiver les boutons des lettres lorsqu'il sont cliqués
      */
-    fun désactiverLettreUtilisée(lettre : Char){
+    fun désactiverLettreUtilisée(lettre : Char) {
         val resID = getResources().getIdentifier("btn$lettre", "id", getPackageName());
         val btn : Button = findViewById(resID)
-
-        btn.setBackgroundColor(COULEUR_DÉSACTIVÉE)      //Mettre la couleur du boutton à gris
-        btn.isClickable = false     //Désactiver le bouton lorsqu'il est cliqué
+        btn.isEnabled = false
     }
 
 
@@ -81,19 +68,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
      *
      * @param lettres liste des lettres utilisées ou à réactiver
      */
-    fun réactiverLettres(lettres : CharArray){
+    fun réactiverLettres(lettres : CharArray) {
         for (i in lettres.indices){
-            var lettreBtn = lettres[i]      //Lettre sur le bouton et son id
-            var idB = getResources().getIdentifier("btn$lettreBtn", "id", getPackageName());    //Id du bouton
-            var btn : Button = findViewById(idB)
-
-            btn.setBackgroundColor(COULEUR_NORMALE)     //Remettre la couleur du bouton à mauve
-            btn.isClickable = true          //activer le bouton lorsque la partie est recommencée
+            var lettreBtn = lettres[i]
+            var idBouton = getResources().getIdentifier("btn$lettreBtn", "id", getPackageName());
+            var btn : Button = findViewById(idBouton)
+            btn.isEnabled = true
         }
     }
 
 
-    fun afficherScore(score : Int){
+    fun afficherScore(score : Int) {
         tvScore.text = score.toString()
     }
 
@@ -109,7 +94,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
      * Affiche un message à l'utilisateur lorsqu'il perd
      * @param mot le mot à deviner
      */
-    fun afficherPerte(mot : String){
+    fun afficherPerte(mot : String) {
         tvMot.text = "VOUS AVEZ PERDU! LE MOT ÉTAIT: " + mot
         tvMot.setTextColor(Color.RED)
     }
@@ -118,16 +103,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
      * Affiche un message à l'utilisateur lorsqu'il gagne
      *
      */
-    fun afficherGagné(){
+    fun afficherGagné() {
         tvMot.text = "BRAVO! VOUS AVEZ GAGNÉ!!"
         tvMot.setTextColor(Color.GREEN)
     }
 
-    fun afficherImageErreur0(){
+
+    fun afficherImageErreur0() {
         imgPendu.setImageResource(R.drawable.erreur0)
     }
 
-    fun afficherImageErreur1(){
+    fun afficherImageErreur1() {
         imgPendu.setImageResource(R.drawable.erreur1)
     }
 
