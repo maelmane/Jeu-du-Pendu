@@ -71,8 +71,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val resID = getResources().getIdentifier("btn$lettre", "id", getPackageName());
         val btn : Button = findViewById(resID)
 
-        btn.setBackgroundColor(COULEUR_DÉSACTIVÉE)      //Mettre la couleur du boutton à gris
-        btn.isClickable = false     //Désactiver le bouton lorsqu'il est cliqué
+        btn.isEnabled = false
     }
 
 
