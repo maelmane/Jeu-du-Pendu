@@ -36,7 +36,7 @@ class Jeu(listeDeMots : Array<String>) {
      *
      * @return vrai si et seulement si la lettre essayée se trouve dans le mot à deviner
      */
-    fun essayerUneLettre(lettre : Char) : Boolean{
+    fun essayerUneLettre(lettre : Char) : Boolean {
         //Ajouter la lettre essayée à la liste de lettres essayées
         lettresEssayées += lettre
         lettresÀRéactiver += lettre
