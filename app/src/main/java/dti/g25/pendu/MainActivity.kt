@@ -1,5 +1,6 @@
 package dti.g25.pendu
 
+import android.app.AlertDialog
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
      * Recommence le jeu (quand le bouton Réinitialiser est cliqué)
      */
     fun rejouer(){
-        présentateur.démarrer()
+        afficherAlèrte()
         tvMot.setTextColor(Color.BLACK)
     }
 
@@ -86,12 +87,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
        tvMot.text = présentateur.motSouligné
     }
 
+    fun afficherAlèrte(){
+        var alèrteBuilder = AlertDialog.Builder(this)
+        alèrteBuilder.setMessage("Voulez-vous commencer le jeu?").setCancelable(false)
+            .setPositiveButton("Oui") {dialog, id -> présentateur.démarrer()}
+            .setNegativeButton("Non") {dialog, id -> dialog.dismiss()}
+        val alèrte = alèrteBuilder.create()
+        alèrte.show()
+    }
+
     /**
      * Affiche un message à l'utilisateur lorsqu'il perd
      * @param mot le mot à deviner
      */
     fun afficherPerte(mot : String) {
-        tvMot.text = "VOUS AVEZ PERDU! LE MOT ÉTAIT: " + mot
+        tvMot.text = "VOUS AVEZ PERDU! LE MOT ÉTAIT: $mot"
         tvMot.setTextColor(Color.RED)
     }
 

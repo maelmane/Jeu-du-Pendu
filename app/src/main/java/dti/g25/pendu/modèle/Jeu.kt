@@ -12,7 +12,7 @@ class Jeu(listeDeMots : Array<String>) {
         if (mots.isEmpty()){
             throw IllegalArgumentException("La liste de mots est vide")
         }
-        motÀDeviner = sélectionnerProchainMot()
+        motÀDeviner = sélectionnerProchainMot().uppercase()
     }
 
 

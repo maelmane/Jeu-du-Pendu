@@ -1,5 +1,6 @@
 package dti.g25.pendu.presentateur
 
+import android.app.AlertDialog
 import android.util.Log
 import dti.g25.pendu.MainActivity
 import dti.g25.pendu.modèle.Jeu
@@ -18,9 +19,11 @@ class Presentateur(var vue: MainActivity) {
      */
     fun sélectionnerLettre(lettre: Char) {
         vue.désactiverLettreUtilisée(lettre)
+
+        var bonneLettre = jeu.essayerUneLettre(lettre)
+
         motSouligné = jeu.étatLettres()
         vue.afficherSouligné()
-        var bonneLettre = jeu.essayerUneLettre(lettre)
 
         if (!bonneLettre)  {
             when (jeu.nbErreurs) {
@@ -54,4 +57,6 @@ class Presentateur(var vue: MainActivity) {
         vue.afficherSouligné()
         vue.afficherScore(jeu.pointage)
     }
+
+
 }
