@@ -18,11 +18,9 @@ class Presentateur(var vue: MainActivity) {
      */
     fun sélectionnerLettre(lettre: Char) {
         vue.désactiverLettreUtilisée(lettre)
-
-        var bonneLettre = jeu.essayerUneLettre(lettre)
-
         motSouligné = jeu.étatLettres()
         vue.afficherSouligné()
+        var bonneLettre = jeu.essayerUneLettre(lettre)
 
         if (!bonneLettre)  {
             when (jeu.nbErreurs) {
