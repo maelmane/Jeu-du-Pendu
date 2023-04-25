@@ -11,7 +11,7 @@ class Jeu(listeDeMots : Array<String>) {
 
     init {
         mots = listeDeMots
-        if (mots.isEmpty()){
+        if (mots.isEmpty()) {
             throw IllegalArgumentException("La liste de mots est vide")
         }
         motÀDeviner = sélectionnerProchainMot()
