@@ -86,8 +86,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             var idB = getResources().getIdentifier("btn$lettreBtn", "id", getPackageName());    //Id du bouton
             var btn : Button = findViewById(idB)
 
-            btn.setBackgroundColor(COULEUR_NORMALE)     //Remettre la couleur du bouton à mauve
-            btn.isClickable = true          //activer le bouton lorsque la partie est recommencée
+    btn.isEnabled = true
         }
     }
 
