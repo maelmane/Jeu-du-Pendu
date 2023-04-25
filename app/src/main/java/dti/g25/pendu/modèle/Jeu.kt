@@ -24,8 +24,7 @@ class Jeu(listeDeMots : Array<String>) {
      * @return un mot sélectionné au hasard
      */
     fun sélectionnerProchainMot(): String {
-        var numéroAléatoire = kotlin.random.Random.nextInt(mots.size)
-        return mots[numéroAléatoire]
+        return mots[kotlin.random.Random.nextInt(mots.size)]
     }
 
 
