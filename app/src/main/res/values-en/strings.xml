@@ -3,4 +3,9 @@
     <string name="app_name">Hangman</string>
     <string name="score">Score</string>
     <string name="réinit">Reset</string>
+    <string name="positive">Yes</string>
+    <string name="negative">No</string>
+    <string name="alèrte_message">Do you want to start the game?</string>
+    <string name="jeu_perdu">"YOU LOST! THE WORD WAS: "</string>
+    <string name="jeu_gagné">YOU WON!!</string>
 </resources>

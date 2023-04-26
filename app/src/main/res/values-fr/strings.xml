@@ -3,4 +3,9 @@
     <string name="app_name">Pendu</string>
     <string name="score">Points</string>
     <string name="réinit">Réinitialiser</string>
+    <string name="positive">Oui</string>
+    <string name="negative">Non</string>
+    <string name="alèrte_message">Voulez-vous commencer le jeu?</string>
+    <string name="jeu_perdu">VOUS AVEZ PERDU! LE MOT ÉTAIT:</string>
+    <string name="jeu_gagné">VOUS AVEZ GAGNÉ!!</string>
 </resources>

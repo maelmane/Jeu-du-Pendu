@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -89,9 +88,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     fun afficherAlèrte(){
         var alèrteBuilder = AlertDialog.Builder(this)
-        alèrteBuilder.setMessage("Voulez-vous commencer le jeu?").setCancelable(false)
-            .setPositiveButton("Oui") {dialog, id -> présentateur.démarrer()}
-            .setNegativeButton("Non") {dialog, id -> dialog.dismiss()}
+        alèrteBuilder.setMessage(R.string.alèrte_message).setCancelable(false)
+            .setPositiveButton(R.string.positive) {dialog, id -> présentateur.démarrer()}
+            .setNegativeButton(R.string.negative) {dialog, id -> dialog.dismiss()}
         val alèrte = alèrteBuilder.create()
         alèrte.show()
     }
@@ -101,7 +100,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
      * @param mot le mot à deviner
      */
     fun afficherPerte(mot : String) {
-        tvMot.text = "VOUS AVEZ PERDU! LE MOT ÉTAIT: $mot"
+        tvMot.text = getResources().getString(R.string.jeu_perdu) + mot
         tvMot.setTextColor(Color.RED)
     }
 
@@ -110,7 +109,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
      *
      */
     fun afficherGagné() {
-        tvMot.text = "BRAVO! VOUS AVEZ GAGNÉ!!"
+        tvMot.text = getResources().getString(R.string.jeu_gagné)
         tvMot.setTextColor(Color.GREEN)
     }
 
